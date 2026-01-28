@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Email Headers Analyzer</title>
+    <link rel="stylesheet" type="text/css" href="popup.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<div class="popup">
+    <h1><i class="fas fa-shield-alt"></i> Adressant</h1>
+    <div class="tab-container" id="tab-container">
+        <button class="tab-button active" data-tab="email-analysis">
+            <i class="fas fa-envelope"></i> Email Analysis
+        </button>
+        <button class="tab-button" data-tab="malicious-analysis">
+            <i class="fas fa-virus-slash"></i> Threat Detection
+        </button>
+    </div>
+
+    <div id="headersActionsContainer">
+        <p id="headerTitle">Click the button to analyze the headers of the email you received.</p>
+        <button id="showHeadersButton" class="animated in-progress">
+            <i class="fas fa-list"></i> Show Headers
+        </button>
+        <h2 id="orText">or</h2>
+        <button id="backButton" class="animated in-progress">
+            <i class="fas fa-arrow-left"></i> Back to Adressant
+        </button>
+    </div>
+    <div id="loader" class="loader"></div>
+    <button id="headersFoundButton" class="animated in-progress" disabled>
+        Headers information was successfully found:
+    </button>
+    <button id="toggleExpandButton" class="animated in-progress">
+        <i class="fas fa-expand"></i> Expand View
+    </button>
+    <div id="headersResult">
+        <div id="addressDetails"></div>
+        <div id="transferDetails"></div>
+        <div id="authenticationDetails"></div>
+        <div id="messageDetails"></div>
+        <div id="contentDetails"></div>
+        <div id="XHeaders"></div>
+        <div id="links"></div>
+        <div id="ipWhois"></div>
+        <div id="unsortedHeaders"></div>
+    </div>
+    <div id="emailErrorContainer"></div>
+    <div id="headersHelp">
+        <p><i class="fas fa-question-circle"></i> Don't know where to find it?
+            <a href="https://web-adressant.azurewebsites.net/guides" target="_blank">Check our guides</a>
+        </p>
+    </div>
+    <button id="languageSwitchButton" class="language-switch-button">
+        <i class="fas fa-globe"></i> EN
+    </button>
+</div>
+<script src="headers.js"></script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Adressant</title>
+    <link rel="stylesheet" type="text/css" href="popup.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<div class="popup">
+    <h1><i class="fas fa-shield-alt"></i> Adressant</h1>
+    <div class="tab-container" id="tab-container">
+        <button class="tab-button active" data-tab="email-analysis">
+            <i class="fas fa-envelope"></i> Email Analysis
+        </button>
+        <button class="tab-button" data-tab="malicious-analysis">
+            <i class="fas fa-virus-slash"></i> Threat Detection
+        </button>
+    </div>
+
+    <!-- Email Analysis Tab -->
+    <div id="email-analysis" class="tab-content active">
+        <div id="emailActionsContainer">
+            <p id="header-email">Select a security analysis option:</p>
+            <button id="ajaxButton" class="animated in-progress">
+                <i class="fas fa-globe"></i> Analyze Domain
+            </button>
+            <h2 id="orText-email">or</h2>
+            <button id="viewHeadersButton" class="animated in-progress">
+                <i class="fas fa-code"></i> View Email Headers
+            </button>
+        </div>
+        <button id="successButton" class="animated in-progress" disabled>
+            Domain information was successfully found:
+        </button>
+        <div id="result-email"></div>
+        <div id="loader-email" class="loader"></div>
+        <div id="emailRatingSection">
+            <p><strong>Rate this domain: <span style="color:var(--secondary)" id="sliderValue"></span></strong></p>
+            <label for="emailRatingSlider"></label>
+            <input type="range" min="1" max="10" step="1" value="5" id="emailRatingSlider">
+        </div>
+        <button id="setRatingButton"><i class="fas fa-save"></i> Set Rating</button>
+        <div id="emailErrorContainer"></div>
+    </div>
+
+    <!-- Malicious Content Analysis Tab -->
+    <div id="malicious-analysis" class="tab-content">
+        <div id="maliciousActionsContainer">
+            <p id="header-malicious">Analyze selected text for potential security threats:</p>
+            <button id="maliciousInfoButton" class="animated in-progress" disabled>
+                <i class="fas fa-search"></i> Analyze Selected Text<br>
+                <small>(Right-click highlighted text)</small>
+            </button>
+        </div>
+        <button id="maliciousSuccessButton" class="animated in-progress" disabled>
+            Text analysis was successfully completed:
+        </button>
+        <div id="result-malicious"></div>
+        <button id="maliciousInfoResultButton" class="animated"><i class="fas fa-info-circle"></i> More Info</button>
+        <div id="maliciousInfoPopup"></div>
+        <div id="feedbackSection" class="feedback-section">
+            <p><strong id="feedbackQuestion"></strong></p>
+            <button id="likeButton" class="feedback-button" title="Like">
+                <i class="fas fa-thumbs-up"></i>
+            </button>
+            <button id="dislikeButton" class="feedback-button" title="Dislike">
+                <i class="fas fa-thumbs-down"></i>
+            </button>
+        </div>
+        <div id="maliciousErrorContainer"></div>
+        <div id="loader-malicious" class="loader"></div>
+    </div>
+    <div id="disclaimer-container">
+        <p><i class="fas fa-info-circle"></i> By using this extension, you agree to allow us to analyze email data and
+            selected text.
+            <a href="policy.html">Privacy Policy</a></p>
+    </div>
+    <button id="languageSwitchButton" class="language-switch-button">
+        <i class="fas fa-globe"></i> EN
+    </button>
+</div>
+<script src="popup.js"></script>
+</body>
+</html>

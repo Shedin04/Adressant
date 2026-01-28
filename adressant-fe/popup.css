@@ -1,0 +1,737 @@
+:root {
+    --primary: #38b000;
+    --primary-dark: #2d9000;
+    --secondary: #7209b7;
+    --secondary-dark: #6008a0;
+    --informational: #4361ee;
+    --informational-dark: #3a56d4;
+    --text-dark: #2b2d42;
+    --text-light: #f8f9fa;
+    --bg-light: #f8f9fa;
+    --bg-medium: #e9ecef;
+    --border-color: #dee2e6;
+    --shadow: rgba(0, 0, 0, 0.1);
+}
+
+.popup {
+    width: 450px;
+    height: 536px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1.5rem;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    text-align: center;
+    position: relative;
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    border-radius: 10px;
+    box-shadow: 0 4px 12px var(--shadow);
+    transition: width 0.3s ease, height 0.3s ease;
+}
+
+.popup.expanded {
+    width: 735px;
+    height: 536px;
+    overflow-y: hidden;
+}
+
+.popup.expanded #headersFoundButton, .popup.expanded #toggleExpandButton {
+    width: 70%;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    color: var(--text-dark);
+    width: 100%;
+}
+
+h2 {
+    font-size: 18px;
+    margin: 18px 0;
+    font-weight: 500;
+}
+
+p {
+    margin: 0 0 15px;
+    line-height: 1.5;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 15px;
+    background-color: var(--primary);
+    color: var(--text-light);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    box-shadow: 0 2px 5px var(--shadow);
+}
+
+button:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px var(--shadow);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+button:disabled {
+    background-color: #adb5bd;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+#result-email, #result-malicious, #headersResult {
+    max-height: 330px;
+    overflow-y: auto;
+    font-size: 14px;
+    background-color: white;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 6px var(--shadow);
+    display: none;
+    width: 92%;
+    max-width: 92%;
+    margin: 20px auto;
+}
+
+#result-malicious {
+    max-height: 260px;
+    overflow-y: auto;
+}
+
+#headersResult {
+    max-height: 400px;
+}
+
+.popup.expanded #headersResult {
+    max-height: 450px;
+}
+
+#headersResult .table {
+    width: 100%;
+    max-width: 100%;
+    table-layout: auto;
+    word-wrap: break-word;
+}
+
+#headersResult .table td, #headersResult .table th {
+    word-break: break-word;
+    max-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#result p, #result-email p, #result-malicious p, #headersResult p {
+    text-align: left;
+}
+
+#result p, #headersResult p {
+    margin: 0 0 8px;
+}
+
+li {
+    word-break: break-all;
+    padding: 4px 0;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 2px 5px var(--shadow);
+    }
+    50% {
+        transform: scale(1.02);
+        box-shadow: 0 4px 10px var(--shadow);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 2px 5px var(--shadow);
+    }
+}
+
+.animated {
+    animation-duration: 0.5s;
+    animation-iteration-count: 1;
+}
+
+.in-progress {
+    animation-name: pulse;
+}
+
+@keyframes slide-in {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.result-animated {
+    animation-duration: 0.5s;
+    animation-iteration-count: 1;
+    animation-name: slide-in;
+}
+
+#emailRatingSection {
+    display: none;
+    padding: 8px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px var(--shadow);
+    margin: 15px auto auto auto;
+    max-height: 120px;
+    overflow-y: auto;
+    width: 92%;
+}
+
+#emailRatingSection p {
+    margin: 0 0 12px;
+}
+
+#emailRatingSlider {
+    width: 100%;
+    margin: 10px 0;
+    accent-color: var(--secondary);
+}
+
+#setRatingButton {
+    display: none;
+    background-color: var(--primary);
+    margin: 15px auto auto auto;
+}
+
+#setRatingButton:hover {
+    background-color: var(--primary-dark);
+}
+
+.email-rating-animation {
+    animation-name: fade-in;
+    animation-duration: 1s;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.feedback-section {
+    display: none;
+    padding: 5px 0;
+    margin: 10px auto;
+    width: 92%;
+    max-width: 92%;
+    text-align: center;
+    background: none;
+    box-shadow: none;
+}
+
+.feedback-section p {
+    margin: 0 0 5px;
+    font-size: 14px;
+}
+
+.feedback-button {
+    padding: 8px 15px;
+    font-size: 14px;
+    margin: 0 8px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.feedback-confirmation {
+    background-color: #f0f8f1;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 20px auto;
+    text-align: center;
+    box-shadow: 0 2px 4px var(--shadow);
+    animation: fade-in 0.5s ease;
+}
+
+.feedback-confirmation p {
+    margin: 0;
+    color: var(--text-dark);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.feedback-confirmation i {
+    font-size: 16px;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#likeButton {
+    background-color: var(--primary);
+    margin: auto 5px;
+}
+
+#likeButton:hover {
+    background-color: var(--primary-dark);
+}
+
+#dislikeButton {
+    background-color: var(--secondary);
+    margin: auto 5px;
+}
+
+#dislikeButton:hover {
+    background-color: var(--secondary-dark)
+}
+
+.loader {
+    display: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 3px solid var(--bg-medium);
+    border-top-color: var(--informational-dark);
+    animation: spinner 1s linear infinite;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes spinner {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+button#ajaxButton,
+button#showHeadersButton {
+    background-color: var(--primary);
+}
+
+button#ajaxButton:hover,
+button#showHeadersButton:hover {
+    background-color: var(--primary-dark);
+}
+
+button#viewHeadersButton,
+button#backButton {
+    background-color: var(--secondary);
+}
+
+button#viewHeadersButton:hover,
+button#backButton:hover {
+    background-color: var(--secondary-dark);
+}
+
+button#backFromPolicyButton {
+    background-color: var(--informational);
+}
+
+button#backFromPolicyButton:hover {
+    background-color: var(--informational-dark);
+}
+
+button#maliciousInfoButton {
+    background-color: var(--informational);
+    font-size: 14px;
+}
+
+button#maliciousInfoButton:hover {
+    background-color: var(--informational-dark);
+}
+
+#toggleExpandButton {
+    background-color: var(--primary-dark);
+    margin: 10px auto;
+    width: 92%;
+    display: none;
+}
+
+#toggleExpandButton:hover {
+    background-color: var(--primary-dark);
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 8px var(--shadow);
+}
+
+.table th, .table td {
+    border: 1px solid var(--border-color);
+    padding: 10px;
+    text-align: left;
+}
+
+.table th {
+    background-color: var(--bg-medium);
+    font-weight: 600;
+}
+
+.tab-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px var(--shadow);
+}
+
+.tab-button {
+    padding: 12px;
+    cursor: pointer;
+    background-color: var(--bg-medium);
+    border: none;
+    flex: 1;
+    text-align: center;
+    font-weight: 500;
+    color: var(--text-dark);
+    transition: all 0.3s ease;
+    box-shadow: none;
+    border-radius: 0;
+}
+
+.tab-button.active {
+    background-color: var(--secondary);
+    color: var(--text-light);
+}
+
+.tab-button:hover:not(.active) {
+    background-color: #d1d9e6;
+    transform: none;
+}
+
+.tab-content {
+    display: none;
+    width: 100%;
+}
+
+.tab-content.active {
+    display: block;
+    flex: 1;
+    overflow-y: auto;
+}
+
+#malicious-analysis {
+    overflow-y: hidden;
+    align-items: center;
+    margin: auto;
+}
+
+#emailActionsContainer, #headersActionsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    min-height: 250px;
+    margin: 40px 0;
+    width: 100%;
+}
+
+#emailActionsContainer p,
+#headersActionsContainer p {
+    margin: 0;
+}
+
+#emailActionsContainer h2,
+#headersActionsContainer h2 {
+    margin: 10px 0;
+}
+
+#showHeadersButton {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#backButton {
+    display: block;
+    margin-top: 5px;
+}
+
+#orText-email, #orText {
+    display: flex;
+    align-items: center;
+    color: #6c757d;
+    font-weight: normal;
+    margin: 10px 0;
+    width: 100%;
+    text-align: center;
+}
+
+#orText-email:before, #orText-email:after,
+#orText:before, #orText:after {
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid #dee2e6;
+    margin: 0 10px;
+}
+
+#disclaimer-container, #headersHelp {
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    width: 100%;
+    padding: 8px 10px;
+    background-color: rgba(248, 249, 250, 0.9);
+    border-top: 1px solid var(--border-color);
+    transition: opacity 0.5s ease;
+    font-size: 13px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+#disclaimer-container a, #headersHelp a, #policyContainer a {
+    color: var(--informational-dark);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+#disclaimer-container p, #headersHelp p {
+    text-align: center;
+    margin: 0;
+}
+
+#disclaimer-container a:hover, #headersHelp a:hover {
+    text-decoration: underline;
+}
+
+#policyContainer {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px var(--shadow);
+    overflow-y: auto;
+    width: 92%;
+    margin: 20px auto;
+    padding: 0 10px 10px;
+}
+
+summary {
+    cursor: pointer;
+    padding: 8px;
+    background-color: var(--bg-medium);
+    border-radius: 6px;
+    font-weight: 500;
+    margin: 10px 0;
+}
+
+details {
+    margin-bottom: 15px;
+    overflow-y: auto;
+    max-height: 140px;
+    position: relative;
+}
+
+#ipWhois details {
+    margin-bottom: 3px;
+    padding-bottom: 8px;
+}
+
+#ipWhois details:not(:last-child) {
+    border-bottom: 1px solid #adb5bd;
+}
+
+#ipWhois details ul, #mxRecorcdsContainer ul, #whoisInfoContainer details ul, #links ol, #maliciousInfoPopup ul {
+    text-align: left;
+    padding-left: 20px;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
+
+#successButton, #headersFoundButton, #maliciousSuccessButton {
+    background-color: var(--informational);
+    margin: auto;
+    width: 92%;
+    display: none;
+}
+
+#successButton:hover, #headersFoundButton:hover, #maliciousSuccessButton:hover {
+    background-color: var(--informational-dark);
+}
+
+#maliciousActionsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    min-height: 200px;
+    margin: 55px 0;
+    width: 100%;
+}
+
+#maliciousActionsContainer p {
+    margin: 0;
+}
+
+#emailErrorContainer {
+    width: 92%;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    top: -50px;
+}
+
+#maliciousErrorContainer {
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+#error-message {
+    color: #e63946;
+    text-align: center;
+    font-weight: bold;
+    padding: 8px;
+    background-color: #f8d7da;
+    border-radius: 6px;
+    margin: 0;
+}
+
+.links-container {
+    overflow-y: auto;
+    max-height: 140px;
+}
+
+#email-analysis {
+    padding-right: 10px;
+    margin-left: 10px;
+    overflow-x: hidden;
+}
+
+#email-analysis::-webkit-scrollbar {
+    right: 5px;
+    position: absolute;
+}
+
+#maliciousInfoResultButton {
+    background-color: var(--informational);
+    margin: auto;
+    padding: 8px 15px;
+    font-size: 14px;
+    display: none;
+    width: auto;
+    position: relative;
+    z-index: 1;
+}
+
+#maliciousInfoResultButton:hover {
+    background-color: var(--informational-dark);
+}
+
+#maliciousInfoPopup {
+    display: none;
+    position: absolute;
+    background-color: var(--bg-light);
+    padding: 15px 5px 0 5px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px var(--shadow);
+    z-index: 1000;
+    width: 81%;
+    font-size: 13px;
+    color: var(--text-dark);
+    border: 1px solid var(--border-color);
+    max-height: 50%;
+    overflow-y: auto;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -5%);
+}
+
+#result-malicious {
+    position: relative;
+    width: 100%;
+}
+
+#maliciousInfoResultButton:hover + #maliciousInfoPopup,
+#maliciousInfoPopup:hover {
+    display: block;
+}
+
+.language-switch-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px 10px;
+    font-size: 12px;
+    background-color: var(--informational);
+    color: var(--text-light);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px var(--shadow);
+    z-index: 1000;
+}
+
+.language-switch-button:hover {
+    background-color: var(--informational-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px var(--shadow);
+}
+
+.language-switch-button:active {
+    transform: translateY(0);
+}

@@ -1,0 +1,25 @@
+name: malicious_content_env
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - cymem>=2.0.13
+  - preshed>=3.0.9,<4.0.0
+  - murmurhash>=1.0.9,<1.0.10
+  - pip:
+      - azureml-defaults>=1.0.45
+      - numpy==1.26.4
+      - blis>=0.8.1,<1.3.0
+      - pandas>=2.3.3
+      - scikit-learn>=1.6.1
+      - transformers>=4.49.0,<4.51.3
+      - torch>=2.6.0,<=2.7.0
+      - spacy>=3.8.4,<4.0.0
+      - thinc>=8.3.4,<9.1.1
+      - pydantic>=2.10.6,<2.11.4
+      - emoji>=2.14.1
+      - xx_ent_wiki_sm @ https://github.com/explosion/spacy-models/releases/download/xx_ent_wiki_sm-3.8.0/xx_ent_wiki_sm-3.8.0.tar.gz
+      - flask<3.1.0
+      - werkzeug==2.2.3
